@@ -5,7 +5,7 @@
 *************************************************************************************************************************************/
 
 
-let cacheName = 'cache-v1';
+let CACHE_NAME = 'cache-v1';
 
 let urlsToCache = [
   "./",
@@ -33,7 +33,7 @@ let urlsToCache = [
 self.addEventListener('install', function(event) {
 
   event.waitUntil(
-    caches.open('cache-v1').then(function(cache) {
+    caches.open(CACHE_NAME).then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
@@ -70,7 +70,7 @@ self.addEventListener('fetch', function(event) {
             // to clone it so we have two streams.
             var responseToCache = response.clone();
 
-            caches.open('cache-v1')
+            caches.open(CACHE_NAME)
               .then(function(cache) {
                 cache.put(event.request, responseToCache);
               });
